@@ -705,7 +705,7 @@ int removeFile(char *name)
 char *t2fs_identify(void)
 {
 
-	return "Arthur Ribero - 207834\nRonaldo Dall'Agnol Veiga - xxxxxx\nMais Alguem - xxxxxx";
+	return "Arthur Ribero - 207834\nRonaldo Dall'Agnol Veiga - 209823\nMais Alguem - xxxxxx";
 }
 
 
@@ -996,7 +996,7 @@ int t2fs_seek(t2fs_file handle, unsigned int offset)
 
 	return -1; //em caso de erro
 }
-
+/*
 int t2fs_first(t2fs_find *findStruct)
 {
 	setupDiskInfo(); //verifica se as informações do disco foram obtidas
@@ -1114,5 +1114,6 @@ int t2fs_next(t2fs_find *findStruct, t2fs_record *dirFile)
 
 	return -1; //caso não há mais arquivos no diretório	
 }
+*/
 
 
