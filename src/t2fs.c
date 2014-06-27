@@ -61,8 +61,7 @@ unsigned int littleEndianToInt(unsigned char* buffer,int startPos, int size)
 {
 	unsigned int val;
 	int idx;
-
-	idx = 0;
+f
 	val = 0;
 
 	val = buffer[startPos]; //posição inicial
@@ -469,7 +468,7 @@ int newFile(char* name)
 	int numFiles;
 	int blockIdx;
 	int fileIdx;
-	char firstNameChar;
+	char valChar;
 	int cnt;
 	unsigned int newDataBlock;
 
@@ -489,10 +488,9 @@ int newFile(char* name)
 
 		for(fileIdx = 0; fileIdx < numFiles; fileIdx ++) //varre todos os registros de arquivos de um bloco de diretório
 		{
-			firstNameChar = blockBuffer[64*fileIdx];
-			firstNameChar = firstNameChar & 128;
+			valChar = blockBuffer[64*fileIdx];
 			
-			if(firstNameChar == 0) //se encontrou um registro inválido
+			if(valChar == 0xFF) //se encontrou um registro inválido
 			{
 
 				//*************************************************
@@ -504,16 +502,19 @@ int newFile(char* name)
 					blockBuffer[cnt + 64*fileIdx] = 0;
 			
 
+				//SETA O 1º caractere de validade
+				blockBuffer[fileIdx*64] = 0x01; //VERIFICAR!!
+
+				// copia o nome do aqruivo para o blockBuffer
 				cnt = 0;
 
 				while( name[cnt] != '\0' )
 				{
-					blockBuffer[cnt + 64*fileIdx] = name[cnt];
+					blockBuffer[cnt + (64*fileIdx +1)] = name[cnt]; //NAO SEI SE TA CERTO!!!
 					cnt ++;
 				}
 
-				//força o bit 7 do primeiro caractere do nome para "1" indicando que é um arquivo válido
-				blockBuffer[fileIdx*64] = blockBuffer[fileIdx*64] | 128;
+
 
 				//aloca um bloco de dados para o arquivo novo
 				
