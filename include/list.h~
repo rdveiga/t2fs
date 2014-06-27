@@ -4,8 +4,7 @@
 //******************************************************************************
 typedef struct fileDescriptor_
 {
-	char typeVal[1];	
-	char name[39];
+	char name[40];
 	char fileSizeInBlocks[4];
 	char fileSizeInBytes[4];
 	char directPointer0[4];

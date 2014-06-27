@@ -334,7 +334,7 @@ FileDescriptor* searchFile(char *name)
 				if(strcmp(name,fileName) == 0)
 				{
 					openedFile = (FileDescriptor*)malloc(sizeof(FileDescriptor));
-					arrayCpy(openedFile->typeVal, &fileReg[0], 1);
+					arrayCpy(openedFile->typeVal, &fileReg[0], 1); //se o arquivo e valido
 					arrayCpy(openedFile->name, &fileReg[1], 39); // no nosso é apartir do 1
 					arrayCpy(openedFile->fileSizeInBlocks, &fileReg[40], 4);
 					arrayCpy(openedFile->fileSizeInBytes, &fileReg[44], 4);
