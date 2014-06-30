@@ -17,6 +17,7 @@ int main(int argc, char **argv) {
 	if (argc != 2) {
 		printf("usage: %s </path/of/the/folder>\n", argv[0]);
 		return 1;
+
 	} else {
 		char *name = argv[1];
 
@@ -28,14 +29,6 @@ int main(int argc, char **argv) {
 		}
 
 		struct t2fs_record record;
-
-		if (handle == -1) {
-			printf("Can't open the specified folder. Check the path.\n");
-			return 1;
-		}
-		else if (handle == -2) {
-			printf("Internal error. Too many files are already opened.\n");
-		}
 
 		t2fs_read(handle, (char*) &record, sizeof(record));
 

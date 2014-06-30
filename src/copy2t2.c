@@ -18,6 +18,7 @@ int main(int argc, char **argv) {
 	if (argc != 3) {
 		printf("usage: %s </nativeDisk/file/path> </t2fsDisk/file/path>\n", argv[0]);
 		return 1;
+
 	} else {
 		FILE *f = fopen(argv[1], "r");
 		fseek(f, 0, SEEK_END);
