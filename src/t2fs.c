@@ -706,7 +706,7 @@ int removeFile(char *name)
 char *t2fs_identify(void)
 {
 
-	return "Arthur Ribero - 207834\nRonaldo Dall'Agnol Veiga - 209823\nMais Alguem - xxxxxx";
+	return "Arthur Ribero - 207834\nRonaldo Dall'Agnol Veiga - 209823\nGabriel St-Denis - 247170";
 }
 
 
