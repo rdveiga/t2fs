@@ -32,10 +32,10 @@ int main(int argc, char **argv) {
 
 		t2fs_read(handle, (char*) &record, sizeof(record));
 
-		while (record.TypeVal == 1 || record.TypeVal == 2) {
+		while (record.TypeVal != TYPEVAL_INVALIDO) {
 			printf("%s ", record.name);
 
-			if (record.TypeVal == 1)
+			if (record.TypeVal == TYPEVAL_REGULAR)
 				printf("r ");
 			else
 				printf("d ");

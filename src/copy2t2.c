@@ -32,7 +32,9 @@ int main(int argc, char **argv) {
 		buffer[fsize] = 0;
 
 		t2fs_file handle = t2fs_create(argv[2]);
+		t2fs_seek(handle, -1); // Posiçiona o contador de posições na posição -1
 		int t2fsize = t2fs_write(handle, buffer, fsize);
+		t2fs_close(handle);
 
 		return 0;
 	}
