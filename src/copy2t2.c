@@ -21,6 +21,12 @@ int main(int argc, char **argv) {
 
 	} else {
 		FILE *f = fopen(argv[1], "r");
+		
+		if (f == NULL) {
+			printf("Incorrect file name on native disk\n");
+			return 1;
+		}
+
 		fseek(f, 0, SEEK_END);
 		long fsize = ftell(f);
 		fseek(f, 0, SEEK_SET);
@@ -32,6 +38,12 @@ int main(int argc, char **argv) {
 		buffer[fsize] = 0;
 
 		t2fs_file handle = t2fs_create(argv[2]);
+	
+		if (handle < 0) {
+			printf("Incorrect file name on t2fs disk\n");
+			return 1;
+		}
+
 		t2fs_seek(handle, -1); // Posiçiona o contador de posições na posição -1
 		int t2fsize = t2fs_write(handle, buffer, fsize);
 		t2fs_close(handle);
