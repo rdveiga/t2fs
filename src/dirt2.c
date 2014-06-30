@@ -9,3 +9,50 @@ utiliza e o tamanho do arquivo em bytes. Exemplos de uso:
 	Atividade1	d	1	704 bytes
 	Se o diretório não existir, uma mensagem de erro deverá ser gerada.
 */
+
+#include "t2fs.h"
+#include <stdio.h>
+
+int main(int argc, char **argv) {
+	if (argc != 2) {
+		printf("usage: %s </path/of/the/folder>\n", argv[0]);
+		return 1;
+	} else {
+		char *name = argv[1];
+
+		t2fs_file handle = t2fs_open(name);
+
+		if (handle < 0) {
+			printf("Incorrect folder name\n");
+			return 1;
+		}
+
+		struct t2fs_record record;
+
+		if (handle == -1) {
+			printf("Can't open the specified folder. Check the path.\n");
+			return 1;
+		}
+		else if (handle == -2) {
+			printf("Internal error. Too many files are already opened.\n");
+		}
+
+		t2fs_read(handle, (char*) &record, sizeof(record));
+
+		while (record.TypeVal == 1 || record.TypeVal == 2) {
+			printf("%s ", record.name);
+
+			if (record.TypeVal == 1)
+				printf("r ");
+			else
+				printf("d ");
+
+			printf("%d ", record.blocksFileSize);
+			printf("%d Bytes\n", record.bytesFileSize);
+		}
+
+		t2fs_close(handle);
+
+		return 0;
+	}
+}

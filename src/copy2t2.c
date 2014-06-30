@@ -15,11 +15,11 @@ aluno ou sisop, não existirem esse comando fornece uma mensagem de erro.
 #include <stdlib.h>
 
 int main(int argc, char **argv) {
-	if (argc != 2) {
-		printf("Invalid arguments");
-		return !;
+	if (argc != 3) {
+		printf("usage: %s </nativeDisk/file/path> </t2fsDisk/file/path>\n", argv[0]);
+		return 1;
 	} else {
-		FILE *f = fopen(argv[0], "r");
+		FILE *f = fopen(argv[1], "r");
 		fseek(f, 0, SEEK_END);
 		long fsize = ftell(f);
 		fseek(f, 0, SEEK_SET);
@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
 
 		buffer[fsize] = 0;
 
-		t2fs_file handle = t2fs_create(argv[1]);
+		t2fs_file handle = t2fs_create(argv[2]);
 		int t2fsize = t2fs_write(handle, buffer, fsize);
 
 		return 0;
